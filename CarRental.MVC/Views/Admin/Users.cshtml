@@ -1,0 +1,60 @@
+@model List<CarRental.MVC.ViewModels.UserViewModel>
+@{
+    ViewData["Title"] = "Gestionar Usuarios";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">
+        <i class="bi bi-people"></i> Gestionar Usuarios
+    </h1>
+    
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No hay usuarios registrados.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id.Substring(0, 8)...</td>
+                            <td>
+                                <strong>@user.FirstName @user.LastName</strong>
+                            </td>
+                            <td>@user.Email</td>
+                            <td>
+                                @if (user.IsAdmin)
+                                {
+                                    <span class="badge bg-danger">Administrador</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary">Usuario</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    
+    <div class="mt-4">
+        <a href="/Admin" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+</div>

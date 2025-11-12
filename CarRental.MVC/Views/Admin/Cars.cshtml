@@ -1,0 +1,84 @@
+@model List<CarRental.MVC.ViewModels.CarViewModel>
+@{
+    ViewData["Title"] = "Gestionar Coches";
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>
+            <i class="bi bi-car-front"></i> Gestionar Coches
+        </h1>
+        <a href="/Admin/CreateCar" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Agregar Coche
+        </a>
+    </div>
+    
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No hay coches registrados. 
+            <a href="/Admin/CreateCar" class="alert-link">Agrega el primero</a>.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Marca/Modelo</th>
+                        <th>Año</th>
+                        <th>Placa</th>
+                        <th>Precio/Día</th>
+                        <th>Categoría</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var car in Model)
+                    {
+                        <tr>
+                            <td>@car.Id</td>
+                            <td>
+                                <strong>@car.Brand @car.Model</strong>
+                            </td>
+                            <td>@car.Year</td>
+                            <td>@car.LicensePlate</td>
+                            <td class="text-primary fw-bold">$@car.PricePerDay</td>
+                            <td><span class="badge bg-secondary">@car.Category</span></td>
+                            <td>
+                                @if (car.IsAvailable)
+                                {
+                                    <span class="badge bg-success">Disponible</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">No Disponible</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="/Admin/EditCar/@car.Id" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-pencil"></i> Editar
+                                </a>
+                                <form method="post" asp-action="DeleteCar" asp-route-id="@car.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger" 
+                                            onclick="return confirm('¿Estás seguro de eliminar este coche?')">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    
+    <div class="mt-4">
+        <a href="/Admin" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+</div>

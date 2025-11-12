@@ -1,0 +1,83 @@
+@model List<CarRental.MVC.ViewModels.ReservationViewModel>
+@{
+    ViewData["Title"] = "Mis Reservas";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">
+        <i class="bi bi-calendar-check"></i> Mis Reservas
+    </h1>
+    
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No tienes reservas aún. 
+            <a href="/" class="alert-link">Explora nuestros coches</a> para hacer tu primera reserva.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Coche</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model)
+                    {
+                        <tr>
+                            <td>@reservation.Id</td>
+                            <td>
+                                @if (reservation.Car != null)
+                                {
+                                    <strong>@reservation.Car.Brand @reservation.Car.Model</strong><br>
+                                    <small class="text-muted">@reservation.Car.LicensePlate</small>
+                                }
+                            </td>
+                            <td>@reservation.StartDate.ToString("dd/MM/yyyy")</td>
+                            <td>@reservation.EndDate.ToString("dd/MM/yyyy")</td>
+                            <td class="fw-bold text-primary">$@reservation.TotalPrice</td>
+                            <td>
+                                @if (reservation.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                }
+                                else if (reservation.Status == "Confirmed")
+                                {
+                                    <span class="badge bg-success">Confirmada</span>
+                                }
+                                else if (reservation.Status == "Completed")
+                                {
+                                    <span class="badge bg-info text-dark">Completada</span>
+                                }
+                                else if (reservation.Status == "Cancelled")
+                                {
+                                    <span class="badge bg-danger">Cancelada</span>
+                                }
+                            </td>
+                            <td>
+                                @if (reservation.Status != "Cancelled" && reservation.Status != "Completed")
+                                {
+                                    <form method="post" asp-action="Cancel" asp-route-id="@reservation.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-danger" 
+                                                onclick="return confirm('¿Estás seguro de cancelar esta reserva?')">
+                                            <i class="bi bi-x-circle"></i> Cancelar
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

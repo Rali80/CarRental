@@ -1,0 +1,122 @@
+@model CarRental.MVC.ViewModels.DashboardStatsViewModel
+@{
+    ViewData["Title"] = "Dashboard Administrativo";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">
+        <i class="bi bi-speedometer2"></i> Dashboard Administrativo
+    </h1>
+    
+    @if (Model != null)
+    {
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Total Coches</h6>
+                                <h2 class="mb-0">@Model.TotalCars</h2>
+                            </div>
+                            <i class="bi bi-car-front-fill" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Coches Disponibles</h6>
+                                <h2 class="mb-0">@Model.AvailableCars</h2>
+                            </div>
+                            <i class="bi bi-check-circle-fill" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-info">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Total Reservas</h6>
+                                <h2 class="mb-0">@Model.TotalReservations</h2>
+                            </div>
+                            <i class="bi bi-calendar-check-fill" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Reservas Pendientes</h6>
+                                <h2 class="mb-0">@Model.PendingReservations</h2>
+                            </div>
+                            <i class="bi bi-clock-fill" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Total Usuarios</h6>
+                                <h2 class="mb-0">@Model.TotalUsers</h2>
+                            </div>
+                            <i class="bi bi-people-fill" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-dark">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-title">Ingresos Totales</h6>
+                                <h2 class="mb-0">$@Model.TotalRevenue</h2>
+                            </div>
+                            <i class="bi bi-cash-stack" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="/Admin/Cars" class="btn btn-primary btn-lg w-100">
+                <i class="bi bi-car-front"></i> Gestionar Coches
+            </a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="/Admin/Reservations" class="btn btn-info btn-lg w-100">
+                <i class="bi bi-calendar-check"></i> Ver Todas las Reservas
+            </a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="/Admin/Users" class="btn btn-secondary btn-lg w-100">
+                <i class="bi bi-people"></i> Gestionar Usuarios
+            </a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="/" class="btn btn-outline-secondary btn-lg w-100">
+                <i class="bi bi-house"></i> Ver Sitio Público
+            </a>
+        </div>
+    </div>
+</div>
