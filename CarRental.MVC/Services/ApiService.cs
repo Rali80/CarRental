@@ -87,13 +87,44 @@ namespace CarRental.MVC.Services
             
             return null;
         }
-        
-        public Task Logout()
+
+        public async Task Logout()
         {
+            
+            var refreshToken = _httpContextAccessor.HttpContext?.Session.GetString("RefreshToken");
+
+            
+            if (!string.IsNullOrEmpty(refreshToken))
+            {
+                var revokeData = new { refreshToken = refreshToken };
+
+                var content = new StringContent(
+                    JsonSerializer.Serialize(revokeData),
+                    Encoding.UTF8,
+                    "application/json");
+
+                try
+                {
+                  
+                    var response = await _httpClient.PostAsync("/api/Auth/revoke", content);
+
+                    
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
+                        System.Diagnostics.Debug.WriteLine($"Error revoking token: {response.StatusCode} - {errorContent}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    System.Diagnostics.Debug.WriteLine($"Exception while revoking token: {ex.Message}");
+                }
+            }
+
+            
             _httpContextAccessor.HttpContext?.Session.Clear();
-            return Task.CompletedTask;
         }
-        
         private void SaveAuthData(AuthResponse authResponse)
         {
             var session = _httpContextAccessor.HttpContext?.Session;

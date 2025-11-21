@@ -1,17 +1,17 @@
 @model List<CarRental.MVC.ViewModels.ReservationViewModel>
 @{
-    ViewData["Title"] = "Todas las Reservas";
+    ViewData["Title"] = "All Reservations";
 }
 
 <div class="container my-5">
     <h1 class="mb-4">
-        <i class="bi bi-calendar-check"></i> Todas las Reservas
+        <i class="bi bi-calendar-check"></i> All Reservations
     </h1>
-    
+
     @if (Model == null || !Model.Any())
     {
         <div class="alert alert-info">
-            <i class="bi bi-info-circle"></i> No hay reservas registradas.
+            <i class="bi bi-info-circle"></i> No reservations are currently registered.
         </div>
     }
     else
@@ -21,13 +21,13 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Coche</th>
-                        <th>Inicio</th>
-                        <th>Fin</th>
+                        <th>User</th>
+                        <th>Car</th>
+                        <th>Start</th>
+                        <th>End</th>
                         <th>Total</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,36 +38,40 @@
                             <td>
                                 @if (reservation.User != null)
                                 {
-                                    <strong>@reservation.User.FirstName @reservation.User.LastName</strong><br>
+                                    <strong>@reservation.User.FirstName @reservation.User.LastName</strong>
+                        
+                                    <br>
                                     <small class="text-muted">@reservation.User.Email</small>
                                 }
                             </td>
                             <td>
                                 @if (reservation.Car != null)
                                 {
-                                    <strong>@reservation.Car.Brand @reservation.Car.Model</strong><br>
+                                    <strong>@reservation.Car.Brand @reservation.Car.Model</strong>
+                        
+                                    <br>
                                     <small class="text-muted">@reservation.Car.LicensePlate</small>
                                 }
                             </td>
-                            <td>@reservation.StartDate.ToString("dd/MM/yyyy")</td>
-                            <td>@reservation.EndDate.ToString("dd/MM/yyyy")</td>
+                            <td>@reservation.StartDate.ToString("MM/dd/yyyy")</td>
+                            <td>@reservation.EndDate.ToString("MM/dd/yyyy")</td>
                             <td class="fw-bold text-primary">$@reservation.TotalPrice</td>
                             <td>
                                 @if (reservation.Status == "Pending")
                                 {
-                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                    <span class="badge bg-warning text-dark">Pending</span>
                                 }
                                 else if (reservation.Status == "Confirmed")
                                 {
-                                    <span class="badge bg-success">Confirmada</span>
+                                    <span class="badge bg-success">Confirmed</span>
                                 }
                                 else if (reservation.Status == "Completed")
                                 {
-                                    <span class="badge bg-info text-dark">Completada</span>
+                                    <span class="badge bg-info text-dark">Completed</span>
                                 }
                                 else if (reservation.Status == "Cancelled")
                                 {
-                                    <span class="badge bg-danger">Cancelada</span>
+                                    <span class="badge bg-danger">Cancelled</span>
                                 }
                             </td>
                             <td>
@@ -76,13 +80,13 @@
                                     <div class="btn-group" role="group">
                                         <form method="post" asp-action="UpdateReservationStatus" asp-route-id="@reservation.Id" asp-route-status="Confirmed" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-success">
-                                                <i class="bi bi-check"></i> Confirmar
+                                                <i class="bi bi-check"></i> Confirm
                                             </button>
                                         </form>
                                         <form method="post" asp-action="UpdateReservationStatus" asp-route-id="@reservation.Id" asp-route-status="Cancelled" class="d-inline">
-                                            <button type="submit" class="btn btn-sm btn-danger" 
-                                                    onclick="return confirm('¿Cancelar esta reserva?')">
-                                                <i class="bi bi-x"></i> Cancelar
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Cancel this reservation?')">
+                                                <i class="bi bi-x"></i> Cancel
                                             </button>
                                         </form>
                                     </div>
@@ -91,7 +95,7 @@
                                 {
                                     <form method="post" asp-action="UpdateReservationStatus" asp-route-id="@reservation.Id" asp-route-status="Completed" class="d-inline">
                                         <button type="submit" class="btn btn-sm btn-info">
-                                            <i class="bi bi-check-circle"></i> Completar
+                                            <i class="bi bi-check-circle"></i> Complete
                                         </button>
                                     </form>
                                 }
@@ -102,10 +106,10 @@
             </table>
         </div>
     }
-    
+
     <div class="mt-4">
         <a href="/Admin" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> Volver al Dashboard
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
         </a>
     </div>
 </div>

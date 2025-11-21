@@ -7,12 +7,12 @@ namespace CarRental.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly IApiService _apiService;
-        
+
         public AccountController(IApiService apiService)
         {
             _apiService = apiService;
         }
-        
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -22,7 +22,7 @@ namespace CarRental.MVC.Controllers
             }
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -30,9 +30,9 @@ namespace CarRental.MVC.Controllers
             {
                 return View(model);
             }
-            
+
             var result = await _apiService.Register(model);
-            
+
             if (result != null)
             {
                 if (result.User.IsAdmin)
@@ -41,11 +41,12 @@ namespace CarRental.MVC.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
-            
-            ModelState.AddModelError("", "Error en el registro. Por favor intenta de nuevo.");
+
+            // MENSAJE CAMBIADO: "Error en el registro. Por favor intenta de nuevo."
+            ModelState.AddModelError("", "Registration failed. Please try again.");
             return View(model);
         }
-        
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -55,7 +56,7 @@ namespace CarRental.MVC.Controllers
             }
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -63,9 +64,9 @@ namespace CarRental.MVC.Controllers
             {
                 return View(model);
             }
-            
+
             var result = await _apiService.Login(model);
-            
+
             if (result != null)
             {
                 if (result.User.IsAdmin)
@@ -74,11 +75,12 @@ namespace CarRental.MVC.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
-            
-            ModelState.AddModelError("", "Email o contraseña incorrectos.");
+
+            // MENSAJE CAMBIADO: "Email o contraseña incorrectos."
+            ModelState.AddModelError("", "Incorrect email or password.");
             return View(model);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

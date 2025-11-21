@@ -1,6 +1,6 @@
 @model CarRental.MVC.ViewModels.LoginViewModel
 @{
-    ViewData["Title"] = "Iniciar Sesión";
+    ViewData["Title"] = "Log In";
 }
 
 <div class="container my-5">
@@ -9,30 +9,30 @@
             <div class="card shadow">
                 <div class="card-body p-5">
                     <h2 class="text-center mb-4">
-                        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                        <i class="bi bi-box-arrow-in-right"></i> Log In
                     </h2>
-                    
+
                     <form method="post" asp-action="Login">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-                        
+
                         <div class="mb-3">
                             <label asp-for="Email" class="form-label">Email</label>
-                            <input asp-for="Email" class="form-control" placeholder="correo@ejemplo.com">
+                            <input asp-for="Email" class="form-control" placeholder="email@example.com">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        
+
                         <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Contraseña</label>
-                            <input asp-for="Password" class="form-control" placeholder="Ingresa tu contraseña">
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" class="form-control" placeholder="Enter your password">
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary w-100 mb-3">
-                            <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                            <i class="bi bi-box-arrow-in-right"></i> Log In
                         </button>
-                        
+
                         <p class="text-center mb-0">
-                            ¿No tienes cuenta? <a href="/Account/Register">Regístrate aquí</a>
+                            Don't have an account? <a href="/Account/Register">Register here</a>
                         </p>
                     </form>
                 </div>

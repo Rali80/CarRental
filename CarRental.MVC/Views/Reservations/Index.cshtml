@@ -1,18 +1,18 @@
 @model List<CarRental.MVC.ViewModels.ReservationViewModel>
 @{
-    ViewData["Title"] = "Mis Reservas";
+    ViewData["Title"] = "My Reservations";
 }
 
 <div class="container my-5">
     <h1 class="mb-4">
-        <i class="bi bi-calendar-check"></i> Mis Reservas
+        <i class="bi bi-calendar-check"></i> My Reservations
     </h1>
-    
+
     @if (Model == null || !Model.Any())
     {
         <div class="alert alert-info">
-            <i class="bi bi-info-circle"></i> No tienes reservas aún. 
-            <a href="/" class="alert-link">Explora nuestros coches</a> para hacer tu primera reserva.
+            <i class="bi bi-info-circle"></i> You don't have any reservations yet.
+            <a href="/" class="alert-link">Explore our cars</a> to make your first booking.
         </div>
     }
     else
@@ -22,12 +22,12 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Coche</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
+                        <th>Car</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Total</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,38 +38,40 @@
                             <td>
                                 @if (reservation.Car != null)
                                 {
-                                    <strong>@reservation.Car.Brand @reservation.Car.Model</strong><br>
+                                    <strong>@reservation.Car.Brand @reservation.Car.Model</strong>
+                        
+                                    <br>
                                     <small class="text-muted">@reservation.Car.LicensePlate</small>
                                 }
                             </td>
-                            <td>@reservation.StartDate.ToString("dd/MM/yyyy")</td>
-                            <td>@reservation.EndDate.ToString("dd/MM/yyyy")</td>
+                            <td>@reservation.StartDate.ToString("MM/dd/yyyy")</td>
+                            <td>@reservation.EndDate.ToString("MM/dd/yyyy")</td>
                             <td class="fw-bold text-primary">$@reservation.TotalPrice</td>
                             <td>
                                 @if (reservation.Status == "Pending")
                                 {
-                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                    <span class="badge bg-warning text-dark">Pending</span>
                                 }
                                 else if (reservation.Status == "Confirmed")
                                 {
-                                    <span class="badge bg-success">Confirmada</span>
+                                    <span class="badge bg-success">Confirmed</span>
                                 }
                                 else if (reservation.Status == "Completed")
                                 {
-                                    <span class="badge bg-info text-dark">Completada</span>
+                                    <span class="badge bg-info text-dark">Completed</span>
                                 }
                                 else if (reservation.Status == "Cancelled")
                                 {
-                                    <span class="badge bg-danger">Cancelada</span>
+                                    <span class="badge bg-danger">Cancelled</span>
                                 }
                             </td>
                             <td>
                                 @if (reservation.Status != "Cancelled" && reservation.Status != "Completed")
                                 {
                                     <form method="post" asp-action="Cancel" asp-route-id="@reservation.Id" class="d-inline">
-                                        <button type="submit" class="btn btn-sm btn-danger" 
-                                                onclick="return confirm('¿Estás seguro de cancelar esta reserva?')">
-                                            <i class="bi bi-x-circle"></i> Cancelar
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Are you sure you want to cancel this reservation?')">
+                                            <i class="bi bi-x-circle"></i> Cancel
                                         </button>
                                     </form>
                                 }

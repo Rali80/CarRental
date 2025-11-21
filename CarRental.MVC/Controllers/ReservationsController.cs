@@ -7,23 +7,23 @@ namespace CarRental.MVC.Controllers
     public class ReservationsController : Controller
     {
         private readonly IApiService _apiService;
-        
+
         public ReservationsController(IApiService apiService)
         {
             _apiService = apiService;
         }
-        
+
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("AccessToken") == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
             var reservations = await _apiService.GetReservations();
             return View(reservations);
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Create(int carId)
         {
@@ -31,18 +31,18 @@ namespace CarRental.MVC.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
             var car = await _apiService.GetCar(carId);
-            
+
             if (car == null)
             {
                 return NotFound();
             }
-            
+
             ViewBag.Car = car;
             return View(new CreateReservationViewModel { CarId = carId });
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateReservationViewModel model)
         {
@@ -50,28 +50,30 @@ namespace CarRental.MVC.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
             if (!ModelState.IsValid)
             {
                 var car = await _apiService.GetCar(model.CarId);
                 ViewBag.Car = car;
                 return View(model);
             }
-            
+
             var result = await _apiService.CreateReservation(model);
-            
+
             if (result != null)
             {
-                TempData["Success"] = "Reserva creada exitosamente";
+                // MENSAJE CAMBIADO: "Reserva creada exitosamente"
+                TempData["Success"] = "Reservation created successfully";
                 return RedirectToAction("Index");
             }
-            
-            ModelState.AddModelError("", "Error al crear la reserva. Verifica que las fechas estén disponibles.");
+
+            // MENSAJE CAMBIADO: "Error al crear la reserva. Verifica que las fechas estén disponibles."
+            ModelState.AddModelError("", "Error creating the reservation. Please verify that the dates are available.");
             var carData = await _apiService.GetCar(model.CarId);
             ViewBag.Car = carData;
             return View(model);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Cancel(int id)
         {
@@ -79,18 +81,20 @@ namespace CarRental.MVC.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            
+
             var success = await _apiService.CancelReservation(id);
-            
+
             if (success)
             {
-                TempData["Success"] = "Reserva cancelada exitosamente";
+                // MENSAJE CAMBIADO: "Reserva cancelada exitosamente"
+                TempData["Success"] = "Reservation cancelled successfully";
             }
             else
             {
-                TempData["Error"] = "Error al cancelar la reserva";
+                // MENSAJE CAMBIADO: "Error al cancelar la reserva"
+                TempData["Error"] = "Error cancelling the reservation";
             }
-            
+
             return RedirectToAction("Index");
         }
     }
