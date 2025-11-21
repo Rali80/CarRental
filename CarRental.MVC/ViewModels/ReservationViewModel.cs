@@ -16,21 +16,21 @@ namespace CarRental.MVC.ViewModels
         public UserViewModel? User { get; set; }
         public DateTime CreatedAt { get; set; }
     }
-    
+
     public class CreateReservationViewModel
     {
-        [Required(ErrorMessage = "Seleccione un coche")]
+        [Required(ErrorMessage = "Please select a car")]
         public int CarId { get; set; }
-        
-        [Required(ErrorMessage = "La fecha de inicio es requerida")]
+
+        [Required(ErrorMessage = "Start date is required")]
         public DateTime StartDate { get; set; }
-        
-        [Required(ErrorMessage = "La fecha de fin es requerida")]
+
+        [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
-        
+
         public string? Notes { get; set; }
     }
-    
+
     public class DashboardStatsViewModel
     {
         public int TotalCars { get; set; }

@@ -4,38 +4,38 @@ namespace CarRental.MVC.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "El email es requerido")]
-        [EmailAddress(ErrorMessage = "Email inválido")]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "La contraseña es requerida")]
-        [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
+
+        [Required(ErrorMessage = "Password is required")]
+        [MinLength(6, ErrorMessage = "Password must be at least 6 characters long")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "Confirme la contraseña")]
-        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
+
+        [Required(ErrorMessage = "Please confirm your password")]
+        [Compare("Password", ErrorMessage = "Passwords do not match")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "El nombre es requerido")]
+
+        [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "El apellido es requerido")]
+
+        [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; } = string.Empty;
     }
-    
+
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "El email es requerido")]
-        [EmailAddress(ErrorMessage = "Email inválido")]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "La contraseña es requerida")]
+
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = string.Empty;
     }
-    
+
     public class AuthResponse
     {
         public string AccessToken { get; set; } = string.Empty;
@@ -43,7 +43,7 @@ namespace CarRental.MVC.ViewModels
         public DateTime ExpiresAt { get; set; }
         public UserViewModel User { get; set; } = null!;
     }
-    
+
     public class UserViewModel
     {
         public string Id { get; set; } = string.Empty;

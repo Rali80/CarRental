@@ -5,35 +5,37 @@ namespace CarRental.MVC.ViewModels
     public class CarViewModel
     {
         public int Id { get; set; }
-        
-        [Required(ErrorMessage = "La marca es requerida")]
+
+        [Required(ErrorMessage = "Brand is required")]
         public string Brand { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "El modelo es requerido")]
+
+        [Required(ErrorMessage = "Model is required")]
         public string Model { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "El año es requerido")]
-        [Range(1900, 2100, ErrorMessage = "Año inválido")]
+
+        [Required(ErrorMessage = "Year is required")]
+        [Range(1900, 2100, ErrorMessage = "Year must be between 1900 and 2100")]
         public int Year { get; set; }
-        
-        [Required(ErrorMessage = "El color es requerido")]
+
+        [Required(ErrorMessage = "Color is required")]
         public string Color { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "La placa es requerida")]
+
+        [Required(ErrorMessage = "License plate is required")]
         public string LicensePlate { get; set; } = string.Empty;
-        
-        [Required(ErrorMessage = "El precio es requerido")]
-        [Range(0.01, 10000, ErrorMessage = "El precio debe estar entre 0.01 y 10000")]
+
+        [Required(ErrorMessage = "Price per day is required")]
+        [Range(0.01, 10000, ErrorMessage = "Price per day must be between 0.01 and 10,000")]
         public decimal PricePerDay { get; set; }
-        
+
         public string? ImageUrl { get; set; }
+
         public string? Description { get; set; }
+
         public bool IsAvailable { get; set; } = true;
-        
-        [Required(ErrorMessage = "La categoría es requerida")]
+
+        [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; } = "Sedan";
-        
-        [Range(1, 20, ErrorMessage = "Los pasajeros deben estar entre 1 y 20")]
+
+        [Range(1, 20, ErrorMessage = "Passenger count must be between 1 and 20")]
         public int Passengers { get; set; } = 5;
     }
 }
