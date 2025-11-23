@@ -119,12 +119,12 @@ namespace CarRental.MVC.Controllers
 
             if (success)
             {
-                // MENSAJE CAMBIADO: "Coche actualizado exitosamente"
+                
                 TempData["Success"] = "Car updated successfully";
                 return RedirectToAction("Cars");
             }
 
-            // MENSAJE CAMBIADO: "Error al actualizar el coche"
+            
             ModelState.AddModelError("", "Error updating the car");
             return View(carViewModel);
         }
@@ -139,12 +139,12 @@ namespace CarRental.MVC.Controllers
 
             if (success)
             {
-                // MENSAJE CAMBIADO: "Coche eliminado exitosamente"
+                
                 TempData["Success"] = "Car deleted successfully";
             }
             else
             {
-                // MENSAJE CAMBIADO: "Error al eliminar el coche"
+               
                 TempData["Error"] = "Error deleting the car";
             }
 
@@ -170,12 +170,12 @@ namespace CarRental.MVC.Controllers
 
             if (success)
             {
-                // MENSAJE CAMBIADO: "Estado actualizado exitosamente"
+                
                 TempData["Success"] = "Status updated successfully";
             }
             else
             {
-                // MENSAJE CAMBIADO: "Error al actualizar el estado"
+                
                 TempData["Error"] = "Error updating the status";
             }
 

@@ -42,7 +42,6 @@ namespace CarRental.MVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // MENSAJE CAMBIADO: "Error en el registro. Por favor intenta de nuevo."
             ModelState.AddModelError("", "Registration failed. Please try again.");
             return View(model);
         }
@@ -76,7 +75,6 @@ namespace CarRental.MVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // MENSAJE CAMBIADO: "Email o contraseña incorrectos."
             ModelState.AddModelError("", "Incorrect email or password.");
             return View(model);
         }

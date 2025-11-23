@@ -62,12 +62,12 @@ namespace CarRental.MVC.Controllers
 
             if (result != null)
             {
-                // MENSAJE CAMBIADO: "Reserva creada exitosamente"
+              
                 TempData["Success"] = "Reservation created successfully";
                 return RedirectToAction("Index");
             }
 
-            // MENSAJE CAMBIADO: "Error al crear la reserva. Verifica que las fechas estén disponibles."
+            
             ModelState.AddModelError("", "Error creating the reservation. Please verify that the dates are available.");
             var carData = await _apiService.GetCar(model.CarId);
             ViewBag.Car = carData;
@@ -86,12 +86,12 @@ namespace CarRental.MVC.Controllers
 
             if (success)
             {
-                // MENSAJE CAMBIADO: "Reserva cancelada exitosamente"
+               
                 TempData["Success"] = "Reservation cancelled successfully";
             }
             else
             {
-                // MENSAJE CAMBIADO: "Error al cancelar la reserva"
+                
                 TempData["Error"] = "Error cancelling the reservation";
             }
 
