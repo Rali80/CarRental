@@ -1,4 +1,11 @@
+## 🎓 LIA / Praktik Project
 
+This project was built as part of my studies at **YH Akademin**
+to demonstrate core skills required for a **junior .NET developer / LIA role**:
+- REST APIs
+- Authentication & authorization
+- MVC frontend
+- Working with databases and business logic
 CarRental - Full-Stack Car Rental System (.NET 9 + MVC + JWT)
 .NET 9
 License: MIT
